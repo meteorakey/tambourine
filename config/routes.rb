@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -53,4 +54,10 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+# 単一のリソースを定義
+# RESRful な URL を自動生成
+# :only 作成される URL を限定
+resources :tambourines, :only => [:index, :create, :destroy]
+
 end
