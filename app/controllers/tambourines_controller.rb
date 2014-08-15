@@ -14,7 +14,7 @@ class TambourinesController < ApplicationController
 
   def destroy
     illust = Illust.find(params[:id])
-    Illust.destroy
+    illust.destroy
     redirect_to :action => :index
   end
 
