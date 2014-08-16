@@ -5,9 +5,8 @@
 
 <body>
 <%= form_for @illust,:url => {:action => :create} do |f| %>
-  <div><%= f.text_field :title %>:タイトル</div>
-  <div><%= f.text_field :date %>:日付</div>
-  <div><%= f.submit "追加" %></div>
+  <div><%= f.text_field :title %>:キーワード</div>
+  <div><%= f.submit "検索" %></div>
 <% end %>
 
 <% @illusts.each do |t| %>

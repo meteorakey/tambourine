@@ -58,6 +58,6 @@ Rails.application.routes.draw do
 # 単一のリソースを定義
 # RESRful な URL を自動生成
 # :only 作成される URL を限定
-resources :tambourines, :only => [:index, :create, :destroy]
+  resources :tambourines, :only => [:index, :create, :destroy]
 
 end

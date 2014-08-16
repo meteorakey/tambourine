@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
-class TambourinesController < ApplicationController
+require 'tumblr_client'
+require 'json'
 
+class TambourinesController < ApplicationController
+  
   def index
     # @ はインスタンス変数
     @illust = Illust.new
@@ -8,19 +11,20 @@ class TambourinesController < ApplicationController
   end
 
   def create
-    Illust.create(illust_params)
-    redirect_to :action => :index
+    client = Tumblr::Client.new({
+                                  :consumer_key => 'cSmyS3pGfKslbJksRu7gM0IaxUWzkpUh9grFRpDuivRfW87AwV',
+                                  :consumer_secret => '0TfaHWWt8Gw9xaXXhSPw2ad0sjUTDE382g3Lh4IypdjMg3SJIU',
+                                  :oauth_token => 'GGrRgDMdtQedlVzJxREpta0ZSY2tVYvdQqr6ArgBVZHGTG90l6',
+                                  :oauth_token_secret => 'Cjm0lDgGH51jnbi1NBI7JeDj33MgLHWdHaIDN2xuTII03okQIH'
+                                })
+    json_resp = client.tagged params[:illust][:title]
+    render :text => json_resp
   end
 
   def destroy
     illust = Illust.find(params[:id])
     illust.destroy
     redirect_to :action => :index
-  end
-
-  private
-  def illust_params
-    params.require(:illust).permit(:title, :date)
   end
 
 end
@@ -44,4 +48,5 @@ module Parser
     end
     return results
   end
+  module_function:parse_json
 end
