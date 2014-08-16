@@ -11,11 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140815061731) do
+ActiveRecord::Schema.define(version: 20140816031203) do
 
   create_table "illusts", force: true do |t|
-    t.string   "title"
-    t.string   "date"
+    t.string   "url"
+    t.integer  "width"
+    t.integer  "height"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

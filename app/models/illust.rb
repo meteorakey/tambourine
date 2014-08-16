@@ -1,6 +1,7 @@
 class Illust < ActiveRecord::Base
 
-validates :title, :presence => true, :uniqueness => true
-validates :date, :presence => true
+validates :url, :presence => true, :uniqueness => true
+validates :width, :presence => true
+validates :height, :presence => true
 
 end

@@ -1,22 +1,17 @@
-<html>
-<Head>
-<title>Tambourine</title>
-</head>
-
-<body>
-<%= form_for @illust,:url => {:action => :create} do |f| %>
-  <div><%= f.text_field :title %>:タイトル</div>
-  <div><%= f.text_field :date %>:日付</div>
-  <div><%= f.submit "追加" %></div>
+<img src="<%= @illust.url%>"NAME="SP" style="width:auto;height:600px;position=center">
+<SCRIPT language="javaScript">
+<!--
+var NO=1;
+img=new Array(3);
+<% @illusts.each do |i| %>
+img[<%= i.id %>]="<%= i.url %>";
 <% end %>
-
-<% @illusts.each do |t| %>
-<div>
-  <%= t.title %>
-  <%= t.date %>
-  <%= link_to "削除", tambourine_path(t), :method => :delete %>
-</div>
-<% end %>
-</body>
-</html>
-
+UP();
+function UP(){
+setTimeout("UP()",5000);
+document.SP.src=img[NO];
+NO=NO+1
+if(NO>3){NO=1;}
+}
+//-->
+</SCRIPT>
