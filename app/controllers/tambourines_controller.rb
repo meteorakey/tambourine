@@ -6,7 +6,7 @@ class TambourinesController < ApplicationController
   
   def index
     # @ はインスタンス変数
-    @illust = Illust.new
+    @illust = Illust.find(1)
     @illusts = Illust.all
   end
 
