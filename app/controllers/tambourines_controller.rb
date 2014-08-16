@@ -11,6 +11,12 @@ class TambourinesController < ApplicationController
   end
 
   def create
+    # DB のデータを消去
+    illusts = Illust.all
+    illusts.each do |illust_for_delete|
+      illust_for_delete.delete
+    end
+
     client = Tumblr::Client.new({
                                   :consumer_key => 'cSmyS3pGfKslbJksRu7gM0IaxUWzkpUh9grFRpDuivRfW87AwV',
                                   :consumer_secret => '0TfaHWWt8Gw9xaXXhSPw2ad0sjUTDE382g3Lh4IypdjMg3SJIU',
@@ -18,9 +24,8 @@ class TambourinesController < ApplicationController
                                   :oauth_token_secret => 'Cjm0lDgGH51jnbi1NBI7JeDj33MgLHWdHaIDN2xuTII03okQIH'
                                 })
     json_resp = client.tagged params[:illust][:keyword]
-    results = Parser.parse_json(json_resp)
-
     # results を DB に登録
+    results = Parser.parse_json(json_resp)
     results.each do |result|
       record = Illust.new(:url => result['url'],
                           :width => result['width'],
@@ -46,6 +51,9 @@ module Parser
     #posts = hash['response']
     posts.each do |post|
       photos = post['photos']
+      if photos.nil?
+        next
+      end
       photos.each do |photo|
         results.push(photo['original_size'])
       end
