@@ -5,25 +5,28 @@
 
 <body>
 <%= form_for @illust,:url => {:action => :create} do |f| %>
-  <div><%= f.text_field :title %>:キーワード</div>
+  <div>キーワード<%= f.text_field :keyword %></div>
   <div><%= f.submit "検索" %></div>
-  <img src="<%= @illust.url%>"NAME="SP" style="width:auto;height:600px;position=center">
-  <SCRIPT language="javaScript">
-    <!--
-        var NO=1;
-        img=new Array(3);
-        <% @illusts.each do |i| %>
-        img[<%= i.id %>]="<%= i.url %>";
-        >>>>>>> 945ddb5b98eaac6cdb3fe6a185363fcec84f2944
-        <% end %>
-        UP();
-        function UP(){
-        setTimeout("UP()",5000);
-        document.SP.src=img[NO];
-        NO=NO+1
-        if(NO>3){NO=1;}
-        }
-        //-->
-  </SCRIPT>
+<% end %>
+
+<br>
+
+<img src="<%= @illust.url%>"NAME="SP" style="width:auto;height:600px;position=center">
+<SCRIPT language="javaScript">
+  <!--
+      var NO=1;
+      img=new Array(28);
+      <% @illusts.each do |i| %>
+      img[<%= i.id %>]="<%= i.url %>";
+      <% end %>
+      UP();
+      function UP(){
+      setTimeout("UP()",5000);
+      document.SP.src=img[NO];
+      NO=NO+1
+      if(NO><%= @illusts.size %>){NO=1;}
+      }
+      //-->
+</SCRIPT>
 </body>
 </html>
